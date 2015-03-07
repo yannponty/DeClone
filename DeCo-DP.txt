@@ -1,0 +1,121 @@
+# Format: 
+#   LHS = RHS ; type for v1 ; type for v2 ; v1v2 adjacency (0/1), optional
+#   type for v1/v2 = Extant or Spec or GDup of GLos
+#   LHS = c1(v1,v2) or c0(v1,v2)
+#   RHS1 = sum of c1 or c0 terms on v1, v2, v1a, v1b, v2a, v2b and of Break(B) or Gain(G)
+#   RHS  = RHS1 or RHS1 : RHS
+#
+# Assumption: terminal cases will deal with the case where v1 and v2 are not reconciled on the same species (cost INF)  
+#
+#
+# Case 1a
+c1(v1,v2) = IsAdj   ; 
+	    Extant ; Extant ; 1
+c0(v1,v2) = IsntAdj ; 
+	    Extant ; Extant ; 1
+# Case 1b
+#c1(v1,v2) = INF ; 
+#	    Extant ; Extant ; 0
+#c0(v1,v2) = 0   ; 
+#	    Extant ; Extant ; 0
+#
+#
+# Case 2a
+c1(v1,v2) = 0 ; 
+	    GLos ; Extant Spec GDup
+c0(v1,v2) = 0 ; 
+	    GLos ; Extant Spec GDup
+# Case 2b
+c1(v1,v2) = 0 ; 
+	    Extant Spec GDup ; GLos
+c0(v1,v2) = 0 ; 
+	    Extant Spec GDup ; GLos
+#
+#
+# Case 3
+c1(v1,v2) = 0 ; 
+	    GLos ; GLos
+c0(v1,v2) = 0 ; 
+	    GLos ; GLos
+#
+#
+# Case 4a
+c1(v1,v2) = c1(v1,v2b) + c0(v1,v2a) : 
+	    c0(v1,v2b) + c1(v1,v2a) : 
+	    c1(v1,v2b) + c1(v1,v2a) + G : 
+	    c0(v1,v2b) + c0(v1,v2a) + B ; 
+	    Extant Spec ; GDup
+c0(v1,v2) = c0(v1,v2b) + c0(v1,v2a) : 
+	    c0(v1,v2b) + c1(v1,v2a) + G : 
+	    c1(v1,v2b) + c0(v1,v2a) + G : 
+	    c1(v1,v2b) + c1(v1,v2a) + G + G ; 
+	    Extant Spec ; GDup
+# Case 4b
+c1(v1,v2) = c1(v1a,v2) + c0(v1b,v2) : 
+	    c0(v1a,v2) + c1(v1b,v2) : 
+	    c1(v1a,v2) + c1(v1b,v2) + G : 
+	    c0(v1a,v2) + c0(v1b,v2) + B ; 
+	    GDup ; Extant Spec
+c0(v1,v2) = c0(v1a,v2) + c0(v1b,v2) : 
+	    c0(v1a,v2) + c1(v1b,v2) + G : 
+	    c1(v1a,v2) + c0(v1b,v2) + G : 
+	    c1(v1a,v2) + c1(v1b,v2) + G + G ; 
+	    GDup ; Extant Spec
+#
+#
+# Case 5
+c1(v1,v2) = c1(v1a,v2b) + c1(v1b,v2a) : 
+	    c1(v1a,v2b) + c0(v1b,v2a) + B : 
+	    c0(v1a,v2b) + c1(v1b,v2a) + B : 
+	    c0(v1a,v2b) + c0(v1b,v2a) + B + B : 
+	    c1(v1a,v2a) + c1(v1b,v2b) : 
+	    c1(v1a,v2a) + c0(v1b,v2b) + B : 
+	    c0(v1a,v2a) + c1(v1b,v2b) + B : 
+	    c0(v1a,v2a) + c0(v1b,v2b) + B + B ; 
+	    Spec ; Spec
+c0(v1,v2) = c0(v1a,v2b) + c0(v1b,v2a) : 
+	    c1(v1a,v2b) + c0(v1b,v2a) + G : 
+	    c0(v1a,v2b) + c1(v1b,v2a) + G : 
+	    c1(v1a,v2b) + c1(v1b,v2a) + G + G : 
+	    c0(v1a,v2a) + c0(v1b,v2b) : 
+	    c1(v1a,v2a) + c0(v1b,v2b) + G : 
+	    c0(v1a,v2a) + c1(v1b,v2b) + G : 
+	    c1(v1a,v2a) + c1(v1b,v2b) + G + G ; 
+	    Spec ; Spec
+#
+#
+# Case 6
+c1(v1,v2) = c1(v1a,v2) + c0(v1b,v2) :
+	    c0(v1a,v2) + c1(v1b,v2) :
+	    c1(v1a,v2) + c1(v1b,v2) + G :
+	    c0(v1a,v2) + c0(v1b,v2) + B :
+	    c1(v1,v2a) + c0(v1,v2b) :
+	    c0(v1,v2a) + c1(v1,v2b) :
+	    c1(v1,v2a) + c1(v1,v2b) + G :
+	    c0(v1,v2a) + c0(v1,v2b) + B :
+	    c1(v1a,v2a) + c1(v1b,v2b) + c0(v1a,v2b) + c0(v1b,v2a) :
+	    c1(v1a,v2a) + c1(v1b,v2b) + c0(v1a,v2b) + c1(v1b,v2a) + G :
+	    c1(v1a,v2a) + c1(v1b,v2b) + c1(v1a,v2b) + c0(v1b,v2a) + G :
+	    c1(v1a,v2a) + c1(v1b,v2b) + c1(v1a,v2b) + c1(v1b,v2a) + G + G :
+	    c1(v1a,v2a) + c0(v1b,v2b) + c0(v1a,v2b) + c0(v1b,v2a) + B :
+	    c1(v1a,v2a) + c0(v1b,v2b) + c0(v1a,v2b) + c1(v1b,v2a) + G + B :
+	    c1(v1a,v2a) + c0(v1b,v2b) + c1(v1a,v2b) + c0(v1b,v2a) + G + B :
+	    c0(v1a,v2a) + c1(v1b,v2b) + c0(v1a,v2b) + c0(v1b,v2a) + B :
+	    c0(v1a,v2a) + c1(v1b,v2b) + c0(v1a,v2b) + c1(v1b,v2a) + G + B :
+	    c0(v1a,v2a) + c1(v1b,v2b) + c1(v1a,v2b) + c0(v1b,v2a) + G + B :
+	    c0(v1a,v2a) + c0(v1b,v2b) + c1(v1a,v2b) + c1(v1b,v2a) :
+	    c0(v1a,v2a) + c1(v1b,v2b) + c1(v1a,v2b) + c1(v1b,v2a) + G :
+	    c1(v1a,v2a) + c0(v1b,v2b) + c1(v1a,v2b) + c1(v1b,v2a) + G :
+	    c0(v1a,v2a) + c0(v1b,v2b) + c1(v1a,v2b) + c0(v1b,v2a) + B :
+	    c0(v1a,v2a) + c0(v1b,v2b) + c0(v1a,v2b) + c1(v1b,v2a) + B :
+	    c0(v1a,v2a) + c0(v1b,v2b) + c0(v1a,v2b) + c0(v1b,v2a) + B + B ;
+	    GDup ; GDup
+c0(v1,v2) = c0(v1a,v2) + c0(v1b,v2) : 
+	    c0(v1a,v2) + c1(v1b,v2) + G : 
+	    c1(v1a,v2) + c0(v1b,v2) + G : 
+	    c1(v1a,v2) + c1(v1b,v2) + G + G : 
+	    c0(v1,v2a) + c0(v1,v2b) : 
+	    c0(v1,v2a) + c1(v1,v2b) + G : 
+	    c1(v1,v2a) + c0(v1,v2b) + G : 
+	    c1(v1,v2a) + c1(v1,v2b) + G + G ; 
+	    GDup ; GDup
