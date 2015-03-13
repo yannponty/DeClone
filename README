@@ -2,60 +2,65 @@
 #                      DeClone                        #
 #######################################################
 
-DeClone is a software for the prediction of ancestral adjacencies in reconciled gene trees.
+DeClone is a software for the prediction of ancestral adjacencies in reconciled
+ gene trees.
 
 1. Installation/requirements
 
-	DeClone requires the following pieces of software to be installed prior to its compilation:
-	  a. Python 2.7 (may function with any version <3 but not tested);
-	  b. GNU gcc/g++ 4.8 and more recent
-	  c. GNU make
+    DeClone requires the following pieces of software to be installed prior to 
+    its compilation:
+      a. Python 2.7 (may function with any version <3 but not tested);
+      b. GNU gcc/g++ 4.8 and more recent
+      c. GNU make
 
-	Once these requirements are met, DeClone can be compiled from its sources by running
-	  make
-	in the installation directory.
+    Once these requirements are met, DeClone can be compiled from its sources by
+    running make in the installation directory.
 
-	Rem.: If your gcc version is prior to 4.8 and does not offer extensive support for C++ 11, you may still compile DeClone with a restricted set of features (i.e. no polytope propagation functionalities, used in the parametric analysis) by instead running 
-	  make DeClone
+    Rem.: If your gcc version is prior to 4.8 and does not offer extensive 
+    support for C++ 11, you may still compile DeClone with a restricted set of 
+    features (i.e. no polytope propagation functionalities, used in the 
+    parametric analysis) by instead running 
+        
+        make DeClone
 
 2. Running DeClone
 
-	DeClone typically takes two reconciled gene trees, and an extant adjacency list, as input.
-	Its offers a variety of output types, as described below.
+    DeClone typically takes two reconciled gene trees, and an extant adjacency 
+    list, as input. It offers a variety of output types, as described below.
 
 2.1 Usage and options
 
-	Usage: DeClone [-t1|--tree1] v1 [-t2|--tree2] v2 [-a|--adjacencies] adj [opts]
-	Where
-	  v1  - (Path to) Gene Tree 1 (Newick format)
-	  v2  - (Path to) Gene Tree 2 (Newick format)
-	  adj - Path to a list of adjacent extant genes
+    Usage: DeClone [-t1|--tree1] v1 [-t2|--tree2] v2 [-a|--adjacencies] adj [opts]
+    Where
+      v1  - (Path to) Gene Tree 1 (Newick format)
+      v2  - (Path to) Gene Tree 2 (Newick format)
+      adj - Path to a list of adjacent extant genes
 
-	Modes (default: -p):
-	  -b,--backtrack k   - Stochastic sampling of k adjacency trees
-	  -c,--count-coopts  - Count the number of co-optimal adjacency trees
-	  -h,--help          - Displays help and exits
-	  -i,--in-out        - Inside-outside mode
-	  -l,--adjpolytope   - Runs polytope propagation with gain cost, break cost and 2 genes as parameters
-						   Requires file with pairs of genes specified by node id in Newick file
-	  -n,--count         - Count the number of valid adjacency trees
-	  -p,--parsimony     - Maximum parsimony mode, returns the minimum cost for an adjacency forest (default)
-	  -s,--show-coopts   - Show all co-optimal adjacency trees
-	  -x,--all           - Exhaustive enumeration of adjacency trees
-	  -y,--polytope      - Runs polytope propagation with gain cost and break cost as parameters
-	  -z,--part-fun      - Computes partition function for instance
+    Modes (default: -p):
+      -b,--backtrack k   - Stochastic sampling of k adjacency trees
+      -c,--count-coopts  - Count the number of co-optimal adjacency trees
+      -h,--help          - Displays help and exits
+      -i,--in-out        - Inside-outside mode
+      -l,--adjpolytope   - Runs polytope propagation with gain cost, break cost and 2 genes as parameters
+                           Requires file with pairs of genes specified by node id in Newick file
+      -n,--count         - Count the number of valid adjacency trees
+      -p,--parsimony     - Maximum parsimony mode, returns the minimum cost for an adjacency forest (default)
+      -s,--show-coopts   - Show all co-optimal adjacency trees
+      -x,--all           - Exhaustive enumeration of adjacency trees
+      -y,--polytope      - Runs polytope propagation with gain cost and break cost as parameters
+      -z,--part-fun      - Computes partition function for instance
 
-	Parameters:
-	  -d,--draw f        - Draws output to file f (mode-dependent)
-	  -kT val            - Sets Boltzmann 'constant' (i.e. temperature) to a given value (def.=1.0)
-	  -m,--matrix        - Outputs a matrix for the adjacency tree (only for -s and -b modes)
-	  -r,--rescale val   - Sets rescaling factor (def.=1.0)
-	  -sc,--score g b    - Sets costs for adjacency gains (g) and breaks (b) (def.=(1.0,1.0))
-	  -v,--verbose       - Verbose mode, provides more (possibly unnecessary) information
+    Parameters:
+      -d,--draw f        - Draws output to file f (mode-dependent)
+      -kT val            - Sets Boltzmann 'constant' (i.e. temperature) to a given value (def.=1.0)
+      -m,--matrix        - Outputs a matrix for the adjacency tree (only for -s and -b modes)
+      -r,--rescale val   - Sets rescaling factor (def.=1.0)
+      -sc,--score g b    - Sets costs for adjacency gains (g) and breaks (b) (def.=(1.0,1.0))
+      -v,--verbose       - Verbose mode, provides more (possibly unnecessary) information
 
 2.2 Input formats
 
-	2.2.a (Extended) Newick gene trees
+    2.2.a (Extended) Newick gene trees
 
         The input gene trees must be binary trees specified in Extended Newick 
         (NHX) format. The branch lengths may default to 1.0. Each leaf node must
@@ -67,14 +72,14 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled 
         - An event Ev (equals one of GDup, Spec, GLos).
         - An integer species id.
  
-	2.2.b Extant adjacency list 
+    2.2.b Extant adjacency list 
 
         The extant adjacency list must contain pairs of extant genes, referred 
         to by their unique name at the leaves of the tree. The genes in each 
         pair must be separated by a single space. The pairs themselves must be  
         separated by a newline.
 
-	2.2.c Ancestral adjacency list (Polytope propagation, i.e. '-l' option)
+    2.2.c Ancestral adjacency list (Polytope propagation, i.e. '-l' option)
 
         In order to refer to an ancestral gene in a gene tree, we use the 
         unique depth first search order assigned to a node when left children 
@@ -90,10 +95,10 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled 
         unique id for an ancestral gene, and two such genes on different gene 
         trees may have the same id as assigned by the DFS.
 
-	
+    
 2.3 Output types
 
-	2.3.a Adjacency forests
+    2.3.a Adjacency forests
 
         Modes: -k, -s, -x
         
@@ -102,10 +107,10 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled 
         considered for the adjacency, listed in the order of the trees given. 
         
 
-	2.3.b Matrices
+    2.3.b Matrices
 
         Modes: -k,-s,-x (with -m option), -i by default
-	    
+        
         The matrix output first lists the set of extant leaf adjacencies, in 
         the same format as the input leaf adjacencies. This is followed by a 
         matrix, with the rows annotated by DFS ids of nodes from the first gene  
@@ -124,6 +129,6 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled 
     2.3.c Polytopes
 
 2.4 Advanced options
-	... add discussion about Rescaling and kT ...
+    ... add discussion about Rescaling and kT ...
 
 3. References
