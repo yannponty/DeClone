@@ -156,18 +156,19 @@ void usage(string cmd){
 	cerr << "  "<<HELP_OPTION_SHORT<<","<<HELP_OPTION_LONG<<"          - Displays help and exits"<<endl;
 	cerr << "  "<<INSIDE_OUTSIDE_OPTION_SHORT<<","<<INSIDE_OUTSIDE_OPTION_LONG<<"        - Inside-outside mode"<<endl;
   #ifdef USE_POLYTOPE
-	  cerr << "  "<<ADJ_POLY_OPTION_SHORT<<","<<ADJ_POLY_OPTION_LONG<<"   - Runs polytope propagation with gain cost, break cost and 2 genes as parameters."<<endl;
-    cerr << "                       Requires file with pairs of genes specified by node id in Newick file."<<endl;
+	  cerr << "  "<<ADJ_POLY_OPTION_SHORT<<","<<ADJ_POLY_OPTION_LONG<<"   - Runs polytope propagation with gain cost, break cost and 2 genes as parameters"<<endl;
+    cerr << "                       Requires file with pairs of genes specified by node id in Newick file"<<endl;
   #endif
 	cerr << "  "<<COUNT_OPTION_SHORT<<","<<COUNT_OPTION_LONG<<"         - Count the number of valid adjacency trees"<<endl;
 	cerr << "  "<<PARSIMONY_OPTION_SHORT<<","<<PARSIMONY_OPTION_LONG<<"     - Maximum parsimony mode (def.)"<<endl;
 	cerr << "  "<<SHOW_COOPTS_OPTION_SHORT<<","<<SHOW_COOPTS_OPTION_LONG<<"   - Show all co-optimal adjacency trees"<<endl;
 	cerr << "  "<<PRINT_ALL_OPTION_SHORT<<","<<PRINT_ALL_OPTION_LONG<<"           - Exhaustive enumeration of adjacency trees"<<endl;
   #ifdef USE_POLYTOPE
-	  cerr << "  "<<POLY_PROP_OPTION_SHORT<<","<<POLY_PROP_OPTION_LONG<<"      - Runs polytope propagation with gain cost and break cost as parameters."<<endl;
+	  cerr << "  "<<POLY_PROP_OPTION_SHORT<<","<<POLY_PROP_OPTION_LONG<<"      - Runs polytope propagation with gain cost and break cost as parameters"<<endl;
   #endif
+    cerr << "  " <<PARTITION_FUNCTION_OPTION_SHORT<<","<<PARTITION_FUNCTION_OPTION_LONG<<"      - Computes partition function for instance"<<endl;
 
-	cerr <<endl<< "Parameters:"<<endl;
+    cerr <<endl<< "Parameters:"<<endl;
 	cerr << "  "<<DRAW_OPTION_SHORT<<","<<DRAW_OPTION_LONG<<" f        - Draws output to file f (mode-dependent)"<<endl;
 	cerr << "  "<<SET_BOLTZMANN_OPTION_SHORT<<" val            - Sets Boltzmann 'constant' (i.e. temperature) to a given value (def.=1.0)"<<endl;
 	cerr << "  "<<OUTPUT_MATRIX_SHORT<<","<<OUTPUT_MATRIX_LONG<<"        - Outputs a matrix for the adjacency tree (only for -s and -b modes)"<<endl;
@@ -311,6 +312,10 @@ int main(int argc, char *argv[])
   		{
   			mode = COUNT_COOPTS_MODE;
   		}
+        else if (opt==SHOW_COOPTS_OPTION_SHORT  || opt==SHOW_COOPTS_OPTION_LONG)
+        {
+            mode = SHOW_COOPTS_MODE;
+        }
   		else if (opt==PRINT_ALL_OPTION_SHORT  || opt==PRINT_ALL_OPTION_LONG)
   		{
   			mode = PRINT_ALL_MODE;

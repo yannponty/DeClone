@@ -36,13 +36,14 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled 
 	  -c,--count-coopts  - Count the number of co-optimal adjacency trees
 	  -h,--help          - Displays help and exits
 	  -i,--in-out        - Inside-outside mode
-	  -l,--adjpolytope   - Runs polytope propagation with gain cost, break cost and 2 genes as parameters.
-						   Requires file with pairs of genes specified by node id in Newick file.
+	  -l,--adjpolytope   - Runs polytope propagation with gain cost, break cost and 2 genes as parameters
+						   Requires file with pairs of genes specified by node id in Newick file
 	  -n,--count         - Count the number of valid adjacency trees
 	  -p,--parsimony     - Maximum parsimony mode, returns the minimum cost for an adjacency forest (default)
 	  -s,--show-coopts   - Show all co-optimal adjacency trees
 	  -x,--all           - Exhaustive enumeration of adjacency trees
-	  -y,--polytope      - Runs polytope propagation with gain cost and break cost as parameters.
+	  -y,--polytope      - Runs polytope propagation with gain cost and break cost as parameters
+	  -z,--part-fun      - Computes partition function for instance
 
 	Parameters:
 	  -d,--draw f        - Draws output to file f (mode-dependent)
@@ -53,14 +54,75 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled 
 	  -v,--verbose       - Verbose mode, provides more (possibly unnecessary) information
 
 2.2 Input formats
-	2.2.a (Extended) Newick 
+
+	2.2.a (Extended) Newick gene trees
+
+        The input gene trees must be binary trees specified in Extended Newick 
+        (NHX) format. The branch lengths may default to 1.0. Each leaf node must
+         have one of the following as its node name.
+        - If it is an extant gene, UNIQUE_NAME|SPECIES_NAME. 
+        - If it is a gene loss, LOSS|SPECIES_ID. 
+
+        Every node must have the following information encoded in the NHX list. 
+        - An event Ev (equals one of GDup, Spec, GLos).
+        - An integer species id.
+ 
 	2.2.b Extant adjacency list 
-	2.2.c Ancestral adjacency list (Polytope propagation, i.e. '-l' option)	
+
+        The extant adjacency list must contain pairs of extant genes, referred 
+        to by their unique name at the leaves of the tree. The genes in each 
+        pair must be separated by a single space. The pairs themselves must be  
+        separated by a newline.
+
+	2.2.c Ancestral adjacency list (Polytope propagation, i.e. '-l' option)
+
+        In order to refer to an ancestral gene in a gene tree, we use the 
+        unique depth first search order assigned to a node when left children 
+        are queried first. 
+
+        The ancestral adjacency list consists of pairs of ancestral gene ids on 
+        each line. The ids of genes from the first gene tree are listed in the 
+        first column, and those from the second gene tree are list in the 
+        second column. In a line, the ids are separated by a space. 
+
+        It is important to note that the order in which the gene trees and 
+        ancestral adjacencies are ordered matters. This is because there is no 
+        unique id for an ancestral gene, and two such genes on different gene 
+        trees may have the same id as assigned by the DFS.
+
+	
 2.3 Output types
-	2.3.a Trees
+
+	2.3.a Adjacency forests
+
+        Modes: -k, -s, -x
+        
+        Adjacency forests are specified as a set of NHX trees, with each 
+        internal node containing the DFS ids of pair of genes that have been 
+        considered for the adjacency, listed in the order of the trees given. 
+        
+
 	2.3.b Matrices
-	... Add output type description/examples here ...
-	2.3.c Polytopes
+
+        Modes: -k,-s,-x (with -m option), -i by default
+	    
+        The matrix output first lists the set of extant leaf adjacencies, in 
+        the same format as the input leaf adjacencies. This is followed by a 
+        matrix, with the rows annotated by DFS ids of nodes from the first gene  
+        tree, and the columns annotated by the DFS ids of nodes from the second 
+        gene tree. 
+
+        The entry (i,j), i and j being annotations (not row and column numbers), 
+        in the matrix can carry the following information.
+
+        - The entry is 1 if the adjacency is present, and 0 otherwise.
+        - For the -i option, the entry represents the probability that the 
+          adjacency is present in an adjacency forest sampled randomly from a 
+          Boltzmann distribution.
+
+
+    2.3.c Polytopes
+
 2.4 Advanced options
 	... add discussion about Rescaling and kT ...
 
