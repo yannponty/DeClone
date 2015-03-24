@@ -148,12 +148,12 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled
         
         The matrix output first lists the set of extant leaf adjacencies, in 
         the same format as the input leaf adjacencies. This is followed by a 
-        matrix, with the rows annotated by DFS ids of nodes from the first gene  
-        tree, and the columns annotated by the DFS ids of nodes from the second 
-        gene tree. 
+        matrix, with the rows annotated by DFS ids of nodes from the first 
+        gene tree, and the columns annotated by the DFS ids of nodes from the 
+        second gene tree. 
 
-        The entry (i,j), i and j being annotations (not row and column numbers), 
-        in the matrix can carry the following information.
+        The entry (i,j), i and j being annotations (not row and column 
+        numbers), in the matrix can carry the following information.
 
         - The entry is 1 if the adjacency is present, and 0 otherwise.
         - For the -i option, the entry represents the probability that the 
