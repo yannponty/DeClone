@@ -67,7 +67,7 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled
 
 ### 2.2 Input formats
 
-    #### 2.2.a (Extended) Newick gene trees
+#### 2.2.a (Extended) Newick gene trees
 
         The input gene trees must be binary trees specified in Extended Newick 
         (NHX) format. The branch lengths may default to 1.0. Each leaf node must
@@ -88,7 +88,7 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled
                 by some offset.
 
 
-    #### 2.2.b Extant adjacency list 
+#### 2.2.b Extant adjacency list 
 
         The extant adjacency list must contain pairs of extant genes, referred 
         to by their unique name at the leaves of the tree. The genes in each 
@@ -104,7 +104,7 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled
                     .................
     
 
-    #### 2.2.c Ancestral adjacency list (Polytope propagation, i.e. '-l' option)
+#### 2.2.c Ancestral adjacency list (Polytope propagation, i.e. '-l' option)
 
         The ancestral adjacency list consists of pairs of ancestral gene ids on 
         each line. The ids of genes from the first gene tree are listed in the 
@@ -126,7 +126,7 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled
     
 ### 2.3 Output types
 
-    #### 2.3.a Adjacency forests
+#### 2.3.a Adjacency forests
 
         Modes: -k, -s, -x
         
@@ -141,7 +141,7 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled
 
         
 
-    #### 2.3.b Matrices
+#### 2.3.b Matrices
 
         Modes: -k,-s,-x (with -m option), -i by default
         
@@ -179,7 +179,7 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled
 
 
 
-    #### 2.3.c Polytopes
+#### 2.3.c Polytopes
 
         Modes: -y, -l
 
