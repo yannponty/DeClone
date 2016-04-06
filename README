@@ -1,11 +1,10 @@
-#######################################################
-#                      DeClone                        #
-#######################################################
+#                      DeClone                        
+
 
 DeClone is a software for the prediction of ancestral adjacencies in reconciled
  gene trees.
 
-1. Installation/requirements
+## 1. Installation/requirements
 
     DeClone requires the following pieces of software to be installed prior to 
     its compilation:
@@ -23,12 +22,12 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled
         
         make DeClone
 
-2. Running DeClone
+## 2. Running DeClone
 
     DeClone typically takes two reconciled gene trees, and an extant adjacency 
     list, as input. It offers a variety of output types, as described below.
 
-2.1 Usage and options
+### 2.1 Usage and options
 
     Usage: DeClone [-t1|--tree1] v1 [-t2|--tree2] v2 [-a|--adjacencies] adj [opts]
     Where
@@ -66,9 +65,9 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled
       -v,--verbose       - Verbose mode, provides more (possibly unnecessary) 
                            information
 
-2.2 Input formats
+### 2.2 Input formats
 
-    2.2.a (Extended) Newick gene trees
+    #### 2.2.a (Extended) Newick gene trees
 
         The input gene trees must be binary trees specified in Extended Newick 
         (NHX) format. The branch lengths may default to 1.0. Each leaf node must
@@ -89,7 +88,7 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled
                 by some offset.
 
 
-    2.2.b Extant adjacency list 
+    #### 2.2.b Extant adjacency list 
 
         The extant adjacency list must contain pairs of extant genes, referred 
         to by their unique name at the leaves of the tree. The genes in each 
@@ -105,7 +104,7 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled
                     .................
     
 
-    2.2.c Ancestral adjacency list (Polytope propagation, i.e. '-l' option)
+    #### 2.2.c Ancestral adjacency list (Polytope propagation, i.e. '-l' option)
 
         The ancestral adjacency list consists of pairs of ancestral gene ids on 
         each line. The ids of genes from the first gene tree are listed in the 
@@ -125,9 +124,9 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled
 
 
     
-2.3 Output types
+### 2.3 Output types
 
-    2.3.a Adjacency forests
+    #### 2.3.a Adjacency forests
 
         Modes: -k, -s, -x
         
@@ -142,7 +141,7 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled
 
         
 
-    2.3.b Matrices
+    #### 2.3.b Matrices
 
         Modes: -k,-s,-x (with -m option), -i by default
         
@@ -180,7 +179,7 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled
 
 
 
-    2.3.c Polytopes
+    #### 2.3.c Polytopes
 
         Modes: -y, -l
 
@@ -239,10 +238,10 @@ DeClone is a software for the prediction of ancestral adjacencies in reconciled
             ...
 
 
-2.4 Advanced options
+### 2.4 Advanced options
     ... add discussion about Rescaling and kT ...
 
-3. References
+## 3. References
 
    Bérard, Sèverine, Coralie Gallien, Bastien Boussau, Gergely J. Szöllősi, 
    Vincent Daubin, and Eric Tannier. "Evolution of gene neighborhoods within 
