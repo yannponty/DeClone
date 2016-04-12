@@ -137,7 +137,7 @@ separated by a newline.
 Adjacency forests are specified as a set of NHX trees, with each 
 internal node representing an ancestral adjacency, the event at that 
 node, the species that the adjacency would be in, and a node id 
-assigned through DFS.
+assigned through DFS (post-order).
 
 Example:
 ```
