@@ -510,7 +510,7 @@ int main(int argc, char *argv[])
                {
                     for(int j =0;j<Dfo2.size();j++){
                         if(Dfo2[j]->isLeaf() and it2->first == Dfo2[j]->getGeneName()){
-                            cout<< "> "<<it1->first<<" "<<it2->first<<" "<<Dfo1[i]->getND()<<" "<<Dfo2[j]->getND()<<"\n";
+                            cout<< "> "<<it1->first<<" "<<it2->first<<" "<<Dfo1[i]->getND()<<" "<<Dfo2[j]->getND()<<endl;
                         }
                     }
                }
